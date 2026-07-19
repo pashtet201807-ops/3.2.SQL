@@ -8,6 +8,7 @@ import ru.netology.data.SQLHelper;
 import ru.netology.page.LoginPage;
 
 import static com.codeborne.selenide.Selenide.open;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LoginTest {
 
@@ -35,5 +36,8 @@ public class LoginTest {
         loginPage.loginWithInvalidPassword(authInfo);
         loginPage.loginWithInvalidPassword(authInfo);
         loginPage.loginWithInvalidPassword(authInfo);
+
+        var userStatus = SQLHelper.getUserStatus(authInfo.getLogin());
+        assertEquals("blocked", userStatus);
     }
 }

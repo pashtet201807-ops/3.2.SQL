@@ -16,20 +16,26 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
 
-    testImplementation 'com.codeborne:selenide:6.19.1'
+    testImplementation 'com.codeborne:selenide:6.19.7'
 
     testImplementation 'mysql:mysql-connector-java:8.0.33'
-
     testImplementation 'commons-dbutils:commons-dbutils:1.7'
+
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
     testCompileOnly 'org.projectlombok:lombok:1.18.30'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.30'
+
     testImplementation 'com.github.javafaker:javafaker:1.0.2'
 }
 
 test {
     useJUnitPlatform()
+
+    systemProperty 'chromeoptions.prefs', System.getProperty('chromeoptions.prefs', "profile.password_manager_leak_detection=false")
+
+    environment "SE_CACHE_PATH", "C:/Users/Public/selenium_cache"
+
     testLogging {
         events "passed", "skipped", "failed"
     }

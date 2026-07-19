@@ -27,6 +27,14 @@ public class SQLHelper {
     }
 
     @SneakyThrows
+    public static String getUserStatus(String login) {
+        var statusSQL = "SELECT status FROM users WHERE login = ?";
+        try (var conn = getConn()) {
+            return runner.query(conn, statusSQL, new ScalarHandler<>(), login);
+        }
+    }
+
+    @SneakyThrows
     public static void cleanDatabase() {
         try (var conn = getConn()) {
             runner.execute(conn, "DELETE FROM auth_codes");

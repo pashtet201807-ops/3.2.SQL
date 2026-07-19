@@ -44,10 +44,3 @@ out/
 !**/src/main/**
 !**/src/test/**
 data/
-/data/
-**/data/
-.gradle/
-.idea/
-build/
-out/
-*.log
