@@ -20,7 +20,7 @@ public class SQLHelper {
 
     @SneakyThrows
     public static String getVerificationCode() {
-        var codeSQL = "SELECT code FROM auth_codes ORDER BY created DESC LIMIT 1";
+        var codeSQL = "SELECT code FROM auth_codes ORDER BY created DESC LIMIT 1;";
         try (var conn = getConn()) {
             return runner.query(conn, codeSQL, new ScalarHandler<>());
         }
@@ -28,7 +28,7 @@ public class SQLHelper {
 
     @SneakyThrows
     public static String getUserStatus(String login) {
-        var statusSQL = "SELECT status FROM users WHERE login = ?";
+        var statusSQL = "SELECT status FROM users WHERE login = ?;";
         try (var conn = getConn()) {
             return runner.query(conn, statusSQL, new ScalarHandler<>(), login);
         }
@@ -38,9 +38,6 @@ public class SQLHelper {
     public static void cleanDatabase() {
         try (var conn = getConn()) {
             runner.execute(conn, "DELETE FROM auth_codes");
-            runner.execute(conn, "DELETE FROM card_transactions");
-            runner.execute(conn, "DELETE FROM cards");
-            runner.execute(conn, "DELETE FROM users");
         }
     }
 }
